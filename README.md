@@ -43,3 +43,9 @@ Workflow `.github/workflows/pages.yml` kiểm tra rồi triển khai. Nếu Page
 ## Ghi nhận
 
 Ý tưởng, bài giảng và mẫu HTML đầu vào: Long Ngo. Phiên bản này thay bộ dựng phụ thuộc CDN bằng phép chiếu 3D tự chứa và bổ sung thí nghiệm, giải thích, đính chính khoa học. Giấy phép MIT xem LICENSE.
+
+## 04 · Mô phỏng Nils Schneider
+
+Bổ sung sáu bước tương tác và tự trình diễn với bộ dữ liệu lịch sử cố định do giảng viên cung cấp: nhận diện r trùng, đọc z, tính nonce k, tính d, rồi kiểm chứng Q=dG và hai chữ ký trên secp256k1 bằng BigInt. Khác thí nghiệm đường cong đồ chơi ở mục 02, mục 04 sử dụng tham số secp256k1 và dữ liệu đã công bố. Không nhập mục tiêu tùy ý hoặc quét blockchain. WIF chỉ hiển thị như giá trị tham chiếu từ tài liệu, không được sinh lại. z chưa được tái dựng từ giao dịch thô; kết quả xác minh chỉ chứng minh tính nhất quán mật mã của bộ dữ liệu.
+
+Bộ kiểm thử bổ sung kiểm tra khóa lịch sử, khóa công khai, nonce, hai chữ ký, bậc nhóm, mẫu số không khả nghịch và từ chối digest bị sửa. Giao diện trực quan chưa được kiểm thử tự động trong môi trường này.
