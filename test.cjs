@@ -51,3 +51,17 @@ assert.equal(journeyContext.chainModel(2,3,'A').reorg,true);
 assert.equal(journeyContext.chainModel(2,3,'A').confirmations,0);
 assert.equal(journeyContext.chainModel(4,3,'B').confirmations,4);
 console.log('PASS: lifecycle, invalid signature gate, fee conservation, fork tie and reorg.');
+const elliptic=vm.createContext({});
+vm.runInContext(s.slice(s.indexOf('const EcLesson='),s.indexOf("let realMode="))+'\nthis.E=EcLesson;',elliptic);
+const E=elliptic.E;
+assert.equal(E.points.length,27);
+for(const [P,n] of [[[0,1],28],[[6,19],14],[[5,19],7],[[11,3],4],[[4,0],2]])assert.equal(E.multiples(P).length-1,n);
+for(const P of E.points){assert.deepEqual(E.add(P,null),P);assert.equal(E.add(P,[P[0],E.M(-P[1])]),null);for(const Q of E.points){const R=E.add(P,Q);if(R)assert.equal(E.M(R[1]**2),E.M(R[0]**3+R[0]+1));}}
+vm.runInContext(s.slice(s.indexOf('function signLesson'),s.indexOf('function renderSign')),ctx);
+let signatures=0;for(let d=1;d<19;d++)for(let k=1;k<19;k++)for(let z=0;z<19;z++){try{assert.equal(ctx.signLesson(d,k,z).valid,true);signatures++;}catch(e){if(!e.message.includes('bằng 0'))throw e;}}
+const addressCtx=vm.createContext({});vm.runInContext(s.slice(s.indexOf('const addressFixture ='),s.indexOf('function renderAddress'))+'this.fixtures=addressFixture;',addressCtx);
+assert.equal(addressCtx.fixtures.compressed.address,'1BgGZ9tcN4rm9KBzDn7KprQz87SZ26SAMH');
+assert.equal(addressCtx.fixtures.uncompressed.address,'1EHNa6Q4Jz2uvNExL497mE43ikXhwF6kZm');
+const crypto=require('node:crypto');const digest=(algo,data)=>crypto.createHash(algo).update(data).digest();
+for(const v of Object.values(addressCtx.fixtures)){const pub=Buffer.from(v.key,'hex'),sha=digest('sha256',pub),hash=digest('ripemd160',sha),payload=Buffer.concat([Buffer.from([0]),hash]);assert.equal(sha.toString('hex'),v.sha);assert.equal(hash.toString('hex'),v.hash);assert.equal(digest('sha256',digest('sha256',payload)).subarray(0,4).toString('hex'),v.checksum);}
+console.log('PASS: F23 group closure, five subgroup orders, '+signatures+' ECDSA signatures and address fixtures.');
