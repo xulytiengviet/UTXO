@@ -60,3 +60,15 @@ Bộ kiểm thử bổ sung kiểm tra khóa lịch sử, khóa công khai, nonc
 - Điều hướng liên kết #start/#map/#lab/#guide/#nils/#journey, nút cảm ứng tối thiểu 44px, bố cục đổi theo màn hình, phóng to/thu nhỏ 3D bằng nút, liên kết bỏ qua điều hướng, giảm chuyển động theo tùy chọn hệ thống.
 
 Các mô phỏng mới là mô hình trạng thái minh họa, không phải mạng Bitcoin hoặc dự báo rủi ro thực. Chữ ký trong mục 05 được giả định đúng/sai; phép xác minh secp256k1 thật nằm ở mục 04. Đã kiểm thử logic, cú pháp và ID/đích điều hướng; chưa thực hiện kiểm tra ảnh chụp/giao diện trên trình duyệt thực ở nhiều thiết bị.
+
+## Điều hướng và chuyên đề ECDSA
+
+Menu cấp cao: Trang Chủ, Chuyên đề, Công cụ, Mã nguồn. Các đường dẫn cũ được giữ; bổ sung #topics, #tools và #ecdsa. Chuyên đề ECDSA gồm hình học trên số thực, nhóm E(F23) với năm điểm sinh, ký/xác minh ECDSA trên E(F17), và bộ dữ liệu địa chỉ P2PKH cho khóa công khai nén/không nén của d=1. Hash/địa chỉ là fixture tính trước; đồ thị nhóm và chữ ký tính trực tiếp.
+
+Tham khảo chuỗi ECDSA and Bitcoin I–III của Jun Wang:
+- https://jun-wang-2018.github.io/MyBlog/en/ECDSA-and-Bitcoin-I/
+- https://jun-wang-2018.github.io/MyBlog/en/ECDSA-and-Bitcoin-II/
+- https://jun-wang-2018.github.io/MyBlog/en/ECDSA-and-Bitcoin-III/
+- https://github.com/Jun-Wang-2018/MyBlog
+
+Không nhập mã/ảnh từ MyBlog; mô phỏng được viết mới, ghi nguồn và đối chiếu SEC1. MIT chỉ áp dụng phần mã của dự án này, không thay giấy phép nội dung bên ngoài. Đã sửa các lỗi tham chiếu về phần tử trung hòa, bậc (4,0) và tiền tố 04. Kiểm thử bổ sung xác nhận nhóm có 28 phần tử, bậc 28/14/7/4/2, 5184 chữ ký hợp lệ trong miền đồ chơi và các hash/checksum fixture. Chưa kiểm thử bố cục trực quan bằng trình duyệt thực.
