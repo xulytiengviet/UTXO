@@ -22,3 +22,13 @@ assert.match(get('utxoResult').textContent,/Chấp nhận/);get('spend').onclick
 get('again').onclick();assert.match(get('utxoResult').textContent,/Từ chối chi trùng/);
 state.resetUTXO();assert.match(get('flow').innerHTML,/Chưa tiêu/);
 console.log('PASS: state transition, double-spend rejection and reset.');
+// Historical Nils Schneider fixture: independent consistency checks.
+const hist=vm.createContext({});
+vm.runInContext(s.slice(s.indexOf('const Nils ='),s.indexOf('let nilsStep='))+'\nthis.C=Nils;',hist);
+const C=hist.C, result=C.calculate();
+assert.equal(result.d,88865298299719117682218467295833367085649033095698151055007620974294165995414n);
+assert.equal(result.d,result.direct);assert.equal(result.match,true);
+assert.equal(result.nonceMatch,true);assert.equal(result.valid1,true);assert.equal(result.valid2,true);
+assert.equal(C.multiply(C.N),null);assert.throws(()=>C.inverse(0n,C.N));
+assert.equal(C.verify(C.z2+1n,C.s2,result.Q),false);
+console.log('PASS: historical key, public key, both signatures, nonce, group order and altered-digest rejection.');
