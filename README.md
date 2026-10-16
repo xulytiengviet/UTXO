@@ -49,3 +49,14 @@ Workflow `.github/workflows/pages.yml` kiểm tra rồi triển khai. Nếu Page
 Bổ sung sáu bước tương tác và tự trình diễn với bộ dữ liệu lịch sử cố định do giảng viên cung cấp: nhận diện r trùng, đọc z, tính nonce k, tính d, rồi kiểm chứng Q=dG và hai chữ ký trên secp256k1 bằng BigInt. Khác thí nghiệm đường cong đồ chơi ở mục 02, mục 04 sử dụng tham số secp256k1 và dữ liệu đã công bố. Không nhập mục tiêu tùy ý hoặc quét blockchain. WIF chỉ hiển thị như giá trị tham chiếu từ tài liệu, không được sinh lại. z chưa được tái dựng từ giao dịch thô; kết quả xác minh chỉ chứng minh tính nhất quán mật mã của bộ dữ liệu.
 
 Bộ kiểm thử bổ sung kiểm tra khóa lịch sử, khóa công khai, nonce, hai chữ ký, bậc nhóm, mẫu số không khả nghịch và từ chối digest bị sửa. Giao diện trực quan chưa được kiểm thử tự động trong môi trường này.
+
+## Giao diện học tập v2 — người mới bắt đầu
+
+- Mặc định mở mục 00 với 5 chặng giải thích từ quyền chi đến bảo mật nhiều lớp, ví von có giới hạn và công thức mở theo nhu cầu.
+- Tiến độ đọc lưu tùy chọn trong localStorage; có nút xóa. Đây là tự đánh dấu, không phải đánh giá kiến thức.
+- Từ điển 28 thuật ngữ, tìm không dấu; đồng hồ modulo và số khả năng entropy tính bằng BigInt.
+- Mục 05 mô phỏng 6 bước thanh toán, chặn chữ ký giả định sai trước mempool, cập nhật UTXO khi vào khối, hai nhánh có công giả định bằng nhau và cô lập góc nhìn node.
+- Giáo trình mở rộng 11 chương, đính chính các khẳng định về RAM, trạng thái account, kênh kề, Taproot và xác nhận.
+- Điều hướng liên kết #start/#map/#lab/#guide/#nils/#journey, nút cảm ứng tối thiểu 44px, bố cục đổi theo màn hình, phóng to/thu nhỏ 3D bằng nút, liên kết bỏ qua điều hướng, giảm chuyển động theo tùy chọn hệ thống.
+
+Các mô phỏng mới là mô hình trạng thái minh họa, không phải mạng Bitcoin hoặc dự báo rủi ro thực. Chữ ký trong mục 05 được giả định đúng/sai; phép xác minh secp256k1 thật nằm ở mục 04. Đã kiểm thử logic, cú pháp và ID/đích điều hướng; chưa thực hiện kiểm tra ảnh chụp/giao diện trên trình duyệt thực ở nhiều thiết bị.
