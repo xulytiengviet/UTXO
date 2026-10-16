@@ -32,3 +32,22 @@ assert.equal(result.nonceMatch,true);assert.equal(result.valid1,true);assert.equ
 assert.equal(C.multiply(C.N),null);assert.throws(()=>C.inverse(0n,C.N));
 assert.equal(C.verify(C.z2+1n,C.s2,result.Q),false);
 console.log('PASS: historical key, public key, both signatures, nonce, group order and altered-digest rejection.');
+// Lifecycle and competing-chain behavior.
+const journeyContext=vm.createContext({Number,Error});
+vm.runInContext(s.slice(s.indexOf('function journeyModel'),s.indexOf('let journeyIndex='))+s.slice(s.indexOf('function chainModel'),s.indexOf('let branchA=')),journeyContext);
+for(const amount of [10000,30000,90000])for(let step=0;step<=5;step++){
+ const m=journeyContext.journeyModel(step,amount,true);
+ assert.equal(amount+m.change+1000,100000);
+ assert.equal(m.confirmations,Math.max(0,step-3));
+ assert.equal(m.confirmed,step>=4);
+ if(step<4)assert.equal(m.state,'S = {An:100000}');
+}
+for(let step=2;step<=5;step++){const m=journeyContext.journeyModel(step,30000,false);assert.equal(m.blocked,true);assert.equal(m.canNext,false);assert.equal(m.confirmations,0);assert.equal(m.state,'S = {An:100000}');}
+assert.throws(()=>journeyContext.journeyModel(6,30000,true));
+assert.throws(()=>journeyContext.journeyModel(2,Infinity,true));
+assert.equal(journeyContext.chainModel(2,1).confirmations,2);
+assert.equal(journeyContext.chainModel(2,2,'A').selected,'A');
+assert.equal(journeyContext.chainModel(2,3,'A').reorg,true);
+assert.equal(journeyContext.chainModel(2,3,'A').confirmations,0);
+assert.equal(journeyContext.chainModel(4,3,'B').confirmations,4);
+console.log('PASS: lifecycle, invalid signature gate, fee conservation, fork tie and reorg.');
