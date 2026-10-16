@@ -72,3 +72,7 @@ Tham khảo chuỗi ECDSA and Bitcoin I–III của Jun Wang:
 - https://github.com/Jun-Wang-2018/MyBlog
 
 Không nhập mã/ảnh từ MyBlog; mô phỏng được viết mới, ghi nguồn và đối chiếu SEC1. MIT chỉ áp dụng phần mã của dự án này, không thay giấy phép nội dung bên ngoài. Đã sửa các lỗi tham chiếu về phần tử trung hòa, bậc (4,0) và tiền tố 04. Kiểm thử bổ sung xác nhận nhóm có 28 phần tử, bậc 28/14/7/4/2, 5184 chữ ký hợp lệ trong miền đồ chơi và các hash/checksum fixture. Chưa kiểm thử bố cục trực quan bằng trình duyệt thực.
+
+## Khôi phục bố cục bài học chính
+
+Giữ thanh website Trang Chủ / Chuyên đề / Công cụ / Mã nguồn, đồng thời khôi phục thanh bài học luôn hiện với nguyên sáu mục 00–05: Bắt đầu từ số 0, Không gian 3D, Thí nghiệm bằng mã, Bài giảng & nguồn, Mô phỏng Nils Schneider, Vòng đời & mạng. Giữ đủ 12 điểm kiến thức trong Không gian 3D. ECDSA là chuyên đề đào sâu riêng tại #ecdsa, có liên kết từ điểm ECDSA / Schnorr, không thay thế lộ trình chính. Hai mức điều hướng có trạng thái đang chọn riêng; thanh bài học cuộn ngang trên màn hình hẹp.
